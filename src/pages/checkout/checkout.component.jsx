@@ -1,10 +1,8 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { CheckoutItem } from '@components/checkout-item/checkout-item.component';
 import { StripeCheckoutButton } from '@components/stripe-button/stripe-button.component';
 import { selectItemsInCart, selectCartTotal } from '@state/cart/cart.selectors';
-import { removeItemFromCart, decreaseItem, increaseItem } from '@state/cart/cart.actions';
 import { formatAsMoney } from '@utils/cart.utils';
 import {
   CheckoutContainer,
@@ -15,27 +13,15 @@ import {
 } from './checkout.styles';
 
 
-const mapStateToProps = createStructuredSelector({
-  itemsInCart: selectItemsInCart,
+const selector = createStructuredSelector({
+  items: selectItemsInCart,
   cartTotal: selectCartTotal
 });
 
-const mapDispatchToProps = dispatch => ({
-  removeItemFromCart: item => dispatch(removeItemFromCart(item)),
-  decreaseItem: item => dispatch(decreaseItem(item)),
-  increaseItem: item => dispatch(increaseItem(item))
-})
+export const CheckoutPage = () => {
+  const { items, cartTotal } = useSelector(selector);
 
-export const CheckoutPage = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(({
-  itemsInCart,
-  cartTotal,
-  removeItemFromCart,
-  increaseItem,
-  decreaseItem
-}) => (
+  return (
     <CheckoutContainer>
       <CheckoutHeader>
         <HeaderBlock>
@@ -54,13 +40,10 @@ export const CheckoutPage = connect(
           <span>Remove</span>
         </HeaderBlock>
       </CheckoutHeader>
-      {itemsInCart.map(cartItem => (
+      {items.map(item => (
         <CheckoutItem
-          key={cartItem.id}
-          item={cartItem}
-          handleDelete={removeItemFromCart}
-          handleIncrease={increaseItem}
-          handleDecrease={decreaseItem}
+          key={item.id}
+          item={item}
         />
       ))}
       <TotalBlock>TOTAL: {formatAsMoney(cartTotal)}</TotalBlock>
@@ -71,4 +54,5 @@ export const CheckoutPage = connect(
     </WarningText>
       <StripeCheckoutButton price={cartTotal} />
     </CheckoutContainer>
-  ));
+  );
+};

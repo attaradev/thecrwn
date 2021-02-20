@@ -28,12 +28,12 @@ export const ContactPage = () => {
     <ContactContainer>
       <Title as='h2'>Contact us</Title>
       <span>We do our best to respond as soon as possible.</span>
-      <form className='form' onSubmit={handleSubmit}>
+      <form className='form' onSubmit={handleSubmit} netlify>
         <FormInput
           type='text'
           name='name'
           value={state.name}
-          label='name'
+          label='Name'
           onChange={handleChange}
           required
         />
@@ -41,7 +41,7 @@ export const ContactPage = () => {
           type='email'
           name='email'
           value={state.email}
-          label='email'
+          label='Email'
           onChange={handleChange}
           required
         />
@@ -49,7 +49,7 @@ export const ContactPage = () => {
           type='text'
           name='subject'
           value={state.subject}
-          label='subject'
+          label='Subject'
           onChange={handleChange}
           required
         />

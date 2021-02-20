@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
-import styled from 'styled-components';
 import { Header } from '@components/header/header.component';
 import { HomePage } from '@pages/homepage/homepage.component';
 import { ShopPage } from '@pages/shop/shop.component';
@@ -12,15 +11,7 @@ import { CheckoutPage } from '@pages/checkout/checkout.component';
 import { Footer } from '@components/footer/footer.component';
 import { checkUserSession } from '@state/user/user.actions';
 import { NotFoundPage } from '@pages/404/404.component';
-
-const AppContainer = styled.div`
-  position: relative;
-  min-height: 100vh;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  margin: 0 4rem;
-`;
+import { AppContainer } from './app.styles';
 
 export const App = () => {
   const dispatch = useDispatch();

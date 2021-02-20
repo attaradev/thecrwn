@@ -1,8 +1,8 @@
-import {  useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { createStructuredSelector } from 'reselect';
+import {  useSelector } from 'react-redux';
 import { selectCollectionsForPreview, selectIsFetching } from '@state/shop/shop.selectors';
 import { CollectionsPreview } from '@components/collections-preview/collections-preview.component';
-import { createStructuredSelector } from '../../../node_modules/reselect/lib/index';
 import { Spinner } from '@components/spinner/spinner.component';
 
 const CollectionsOverviewContainer = styled.div`

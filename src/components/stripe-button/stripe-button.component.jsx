@@ -1,14 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import StripeCheckout from 'react-stripe-checkout';
-import { formatAsMoney } from '../../utils/cart.utils';
-import { clearCart } from '../../state/cart/cart.actions';
+import { formatAsMoney } from '@utils/cart.utils';
+import { clearCart } from '@state/cart/cart.actions';
+import env from '@utils/env.utils';
 
 
-export const StripeCheckoutButton = connect()(
-  ({ price, dispatch }) => {
+export const StripeCheckoutButton =
+  ({ price }) => {
+    const dispatch = useDispatch();
     const priceForStripe = price * 100;
-    const publishableKey = process.env.REACT_APP_STRIPE_API_KEY;
+    const publishableKey = env.STRIPE_API_KEY
 
     const onToken = token => {
       console.log(token);
@@ -30,5 +31,4 @@ export const StripeCheckoutButton = connect()(
         stripeKey={publishableKey}
       />
     );
-  }
-)
+  };

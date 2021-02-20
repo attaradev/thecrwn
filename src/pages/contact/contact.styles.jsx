@@ -60,6 +60,6 @@ export const TextAreaContainer = styled.textarea`
   }
 
   &:focus ~ label {
-    &{shrinkLabelStyles}
+    ${shrinkLabelStyles}
   }
 `;

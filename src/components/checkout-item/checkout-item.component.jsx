@@ -1,4 +1,5 @@
-import React from 'react';
+import { useDispatch } from 'react-redux';
+import { decreaseItem, increaseItem, removeItemFromCart } from '@state/cart/cart.actions';
 import { formatAsMoney } from '../../utils/cart.utils';
 import {
   CheckoutItemContainer,
@@ -12,7 +13,12 @@ import {
 } from './checkout-item.styles';
 
 
-export const CheckoutItem = ({ item, handleDelete, handleIncrease, handleDecrease }) => {
+
+export const CheckoutItem = ({ item }) => {
+  const dispatch = useDispatch();
+  const remove = () => dispatch(removeItemFromCart(item));
+  const decrease = () => dispatch(decreaseItem(item));
+  const increase = () => dispatch(increaseItem(item));
   const { name, imageUrl, price, quantity } = item;
 
   return (
@@ -22,16 +28,16 @@ export const CheckoutItem = ({ item, handleDelete, handleIncrease, handleDecreas
       </ImageContainer>
       <ItemName>{name}</ItemName>
       <ItemQuantity>
-        <Arrow onClick={() => handleDecrease(item)}>&#10094;</Arrow>
+        <Arrow onClick={decrease}>&#10094;</Arrow>
         <Value>{quantity}</Value>
-        <Arrow onClick={() => handleIncrease(item)}>&#10095;</Arrow>
+        <Arrow onClick={increase}>&#10095;</Arrow>
       </ItemQuantity>
       <ItemPrice>
         {
           formatAsMoney(price)
         }
       </ItemPrice>
-      <RemoveButton onClick={() => handleDelete(item)}>&#10005;</RemoveButton>
+      <RemoveButton onClick={remove}>&#10005;</RemoveButton>
     </CheckoutItemContainer>
   )
 };

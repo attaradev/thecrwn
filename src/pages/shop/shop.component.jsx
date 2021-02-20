@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import styled from 'styled-components';
+import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
-import styled from 'styled-components';
 import { fetchCollections } from '@state/shop/shop.actions';
 import { Collection } from '@components/collection/collection.component';
 import { CollectionsOverview } from '@components/collections-overview/collections-overview.component';
